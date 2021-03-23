@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// Query holds Timescale SQL query, typically decoded from the program's
+// Query holds CirroTimeS SQL query, typically decoded from the program's
 // input.
 type Query struct {
 	HumanLabel       []byte

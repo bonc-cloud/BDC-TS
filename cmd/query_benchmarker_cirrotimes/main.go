@@ -1,10 +1,8 @@
-// query_benchmarker_opentsdb speed tests OpenTSDB using requests from stdin.
+// query_benchmarker_cirrotimes speed tests cirrotimes using requests from stdin.
 //
 // It reads encoded Query objects from stdin, and makes concurrent requests
-// to the provided HTTP endpoint. This program has no knowledge of the
-// internals of the endpoint.
+// to session.
 //
-// TODO(rw): On my machine, this only decodes 700k/sec messages from stdin.
 package main
 
 import (

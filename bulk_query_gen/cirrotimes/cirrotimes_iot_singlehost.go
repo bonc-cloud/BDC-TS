@@ -5,7 +5,6 @@ import (
 )
 import bulkQuerygen "github.com/caict-benchmark/BDC-TS/bulk_query_gen"
 
-// TimescaleIotSingleHost produces Timescale-specific queries for the devops single-host case.
 type CirroTimesIotSingleHost struct {
 	CirroTimesIot
 }

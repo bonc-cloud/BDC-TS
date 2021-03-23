@@ -9,12 +9,11 @@ import (
 	"time"
 )
 
-// TimescaleDevops produces Timescale-specific queries for all the devops query types.
+
 type CirroTimesIot struct {
 	bulkQuerygen.CommonParams
 }
 
-// NewTimescaleDevops makes an TimescaleDevops object ready to generate Queries.
 func NewCirroTimesIotCommon(dbConfig bulkQuerygen.DatabaseConfig, interval bulkQuerygen.TimeInterval, duration time.Duration, scaleVar int) bulkQuerygen.QueryGenerator {
 	if _, ok := dbConfig[bulkQuerygen.DatabaseName]; !ok {
 		panic("need influx database name")
@@ -37,9 +36,8 @@ func (d *CirroTimesIot) AverageTemperatureDayByHourOneHome(q bulkQuerygen.Query)
 }
 
 // averageTemperatureHourByMinuteNHomes populates a Query with a query that looks like:
-// SELECT avg(temperature) from air_condition_room where (home_id = '$HHOME_ID_1' or ... or hostname = '$HOSTNAME_N') and time >= '$HOUR_START' and time < '$HOUR_END' group by time(1h)
+// select avg(temperature) from root.sg2.air_condition_room.*.home_id.*  group by  ([2016-01-01T19:24:45,2016-01-02T07:24:45), 1h)
 func (d *CirroTimesIot) averageTemperatureDayByHourNHomes(qi bulkQuerygen.Query, nHomes int, timeRange time.Duration) {
-	/*sgNum := strconv.Itoa(int(xxhash.Sum64String(AirConditionRoom) % (uint64(SgNum))))*/
 	interval := d.AllInterval.RandWindow(timeRange)
 	nn := rand.Perm(d.ScaleVar)[:nHomes]
 

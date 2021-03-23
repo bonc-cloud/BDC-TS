@@ -22,13 +22,13 @@ func NewSerializerCirrotimes(sgNum int64) *SerializerCirrotimes {
 }
 
 // SerializerCirrotimes writes Point data to the given writer, conforming to the
-// InfluxDB wire protocol.
+// Cirrotimes wire protocol.
 //
 // This function writes output that looks like:
-// <measurement>,<tag key>=<tag value> <field name>=<field value> <timestamp>\n
+// device:<device>,timestamp:<timestamp>,measurements:[measurements],values:[values],dataTypes:[dataTypes]
 //
 // For example:
-// foo,tag0=bar baz=-1.0 100\n
+// "device":"root.sg_1.d_1","timestamp":1514766055000,"measurements":["s1","s2"],"values":[255,1431],"dataTypes":[2,2]
 //
 // TODO(rw): Speed up this function. The bulk of time is spent in strconv.
 func (s *SerializerCirrotimes) SerializePoint(w io.Writer, p *Point) (err error) {
@@ -76,6 +76,5 @@ func (s *SerializerCirrotimes) SerializePoint(w io.Writer, p *Point) (err error)
 }
 
 func (s *SerializerCirrotimes) SerializeSize(w io.Writer, points int64, values int64) error {
-	/*return serializeSizeInText(w, points, values)*/
 	return nil
 }

@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-// OpenTSDBDevopsSingleHost produces OpenTSDB-specific queries for the devops single-host case.
 type CirroTimesDevopsSingleHost struct {
 	CirroTimesDevops
 }

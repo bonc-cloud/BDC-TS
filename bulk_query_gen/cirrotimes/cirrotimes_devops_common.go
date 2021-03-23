@@ -56,10 +56,7 @@ func (c *CirroTimesDevops) MaxCPUUsage12HoursByMinuteOneHost(q bulkQuerygen.Quer
 	c.maxCPUUsageHourByMinuteNHosts(q, 1, 12*time.Hour)
 }
 
-// MaxCPUUsageHourByMinuteThirtyTwoHosts populates a Query with a query that looks like:
-// SELECT max(usage_user) from cpu where (hostname = '$HOSTNAME_1' or ... or hostname = '$HOSTNAME_N') and time >= '$HOUR_START' and time < '$HOUR_END' group by time(1m)
 func (c *CirroTimesDevops) maxCPUUsageHourByMinuteNHosts(qi bulkQuerygen.Query, nhosts int, timeRange time.Duration) {
-	/*sgNum := strconv.Itoa(int(xxhash.Sum64String(Cpu) % (uint64(SgNum))))*/
 	interval := c.AllInterval.RandWindow(timeRange)
 	nn := rand.Perm(c.ScaleVar)[:nhosts]
 

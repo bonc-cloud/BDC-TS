@@ -20,7 +20,6 @@ func NewCirroTimesKapaRam(dbConfig bulkQuerygen.DatabaseConfig, queriesFullRange
 
 func (c *CirroTimesKapaRam) Dispatch(i int) bulkQuerygen.Query {
 	q, interval := c.CirroTimesDashboard.DispatchCommon(i)
-	/*sgNum := strconv.Itoa(int(xxhash.Sum64String(Ram) % (uint64(SgNum))))*/
 	startTimestamp := interval.StartUnixNano() / 1e6
 	endTimestamp := interval.EndUnixNano() / 1e6
 

@@ -20,7 +20,6 @@ func NewCirroTimesDiskUsage(dbConfig bulkQuerygen.DatabaseConfig, queriesFullRan
 
 func (c *CirroTimesDiskUsage) Dispatch(i int) bulkQuerygen.Query {
 	q, interval := c.CirroTimesDashboard.DispatchCommon(i)
-	/*sgNum := strconv.Itoa(int(xxhash.Sum64String(Disk) % (uint64(SgNum))))*/
 	startTimestamp := interval.StartUnixNano() / 1e6
 	endTimestamp := interval.EndUnixNano() / 1e6
 

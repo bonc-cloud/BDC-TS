@@ -3,7 +3,6 @@ package cirrotimes
 import "time"
 import bulkQuerygen "github.com/caict-benchmark/BDC-TS/bulk_query_gen"
 
-// OpenTSDBDevopsSingleHost12hr produces OpenTSDB-specific queries for the devops single-host case over a 12hr period.
 type CirroTimesDevopsSingleHost12hr struct {
 	CirroTimesDevops
 }

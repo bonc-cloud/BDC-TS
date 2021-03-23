@@ -1,4 +1,4 @@
-// bulk_load_opentsdb loads an OpenTSDB daemon with data from stdin.
+// bulk_load_cirrotimes loads an cirrotimes daemon with data from stdin.
 //
 // The caller is responsible for assuring that the database is empty before
 // bulk load.
@@ -462,7 +462,3 @@ func processBackoffMessages() {
 	backingOffDone <- struct{}{}
 }
 
-// TODO(rw): listDatabases lists the existing data in OpenTSDB.
-func listDatabases(daemonUrl string) ([]string, error) {
-	return nil, nil
-}

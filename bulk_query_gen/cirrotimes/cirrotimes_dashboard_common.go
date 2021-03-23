@@ -18,7 +18,7 @@ type CirroTimesDashboard struct {
 // NewTimescaleDevops makes an TimescaleDevops object ready to generate Queries.
 func NewCirroTimesDashboardCommon(dbConfig bulkQuerygen.DatabaseConfig, interval bulkQuerygen.TimeInterval, duration time.Duration, scaleVar int) bulkQuerygen.QueryGenerator {
 	if _, ok := dbConfig[bulkQuerygen.DatabaseName]; !ok {
-		panic("need influx database name")
+		panic("need cirrotimes database name")
 	}
 	clustersCount := scaleVar / dashboard.ClusterSize //ClusterSizes[len(dashboard.ClusterSizes)/2]
 	if clustersCount == 0 {
