@@ -19,31 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2c5a1a4-de13-4515-be9d-4a62b8bc2092" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/BDC-TS.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_data_gen/common/serializer_cirrotimes.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_dashboard_common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_dashboard_disk_usage.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_dashboard_kapa_load.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_dashboard_kapa_ram.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_devops_8_hosts.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_devops_common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_devops_singlehost.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_devops_singlehost_12hr.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_iot_common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/cirrotimes_iot_singlehost.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/constant.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulk_query_gen/cirrotimes/query.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/query_benchmarker_cirrotimes/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/query_benchmarker_cirrotimes/query.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/query_benchmarker_cirrotimes/stats.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/bulk_data_gen/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/bulk_data_gen/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/bulk_load_opentsdb/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/bulk_load_opentsdb/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/bulk_query_gen/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/bulk_query_gen/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/query_benchmarker_opentsdb/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/query_benchmarker_opentsdb/main.go" afterDir="false" />
-    </list>
+    <list default="true" id="f2c5a1a4-de13-4515-be9d-4a62b8bc2092" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -226,10 +202,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="252" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1616467542144" />
-    <state x="121" y="187" width="1182" height="544" key="DiffContextDialog" timestamp="1616468349646">
+    <state x="121" y="187" width="1182" height="544" key="DiffContextDialog" timestamp="1616468689942">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="121" y="187" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1616468349646" />
+    <state x="121" y="187" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1616468689942" />
     <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1613630123475">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
