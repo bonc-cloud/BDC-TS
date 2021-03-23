@@ -5,8 +5,8 @@
 + Elasticsearch ([announcement blog here](https://influxdata.com/blog/influxdb-markedly-elasticsearch-in-time-series-data-metrics-benchmark/))
 + Cassandra ([InfluxDB Tops Cassandra in Time-Series Data & Metrics Benchmark](https://www.influxdata.com/influxdb-vs-cassandra-benchmark-time-series-metrics/))
 + MongoDB ([InfluxDB is 27x Faster vs MongoDB for Time-Series Workloads](https://www.influxdata.com/influxdb-is-27x-faster-vs-mongodb-for-time-series-workloads/))
-+ OpenTSDB
-+ CirroData-TimeS ()
++ OpenTSDB  
++ CirroData-TimeS ([CirroData-TimeS BDC-TS test plan](https://github.com/bonc-cloud/BDC-TS/blob/bonc_master/practices/CirroData-TimeS/README.md))
 
 ## 一、准备工作
 需要安装golang和安装测试工程
