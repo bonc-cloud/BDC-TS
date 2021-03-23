@@ -10,12 +10,14 @@ import (
 	"github.com/caict-benchmark/BDC-TS/bulk_data_gen/common"
 	bulkQueryGen "github.com/caict-benchmark/BDC-TS/bulk_query_gen"
 	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/cassandra"
+	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/cirrotimes"
 	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/elasticsearch"
 	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/graphite"
 	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/influxdb"
 	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/mongodb"
 	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/opentsdb"
 	"github.com/caict-benchmark/BDC-TS/bulk_query_gen/timescaledb"
+
 	"log"
 	"math/rand"
 	"os"
@@ -64,6 +66,7 @@ var useCaseMatrix = map[string]map[string]map[string]bulkQueryGen.QueryGenerator
 			"influx-http":      influxdb.NewInfluxQLDevopsSingleHost,
 			"mongo":            mongodb.NewMongoDevopsSingleHost,
 			"opentsdb":         opentsdb.NewOpenTSDBDevopsSingleHost,
+			"cirrotimes":       cirrotimes.NewCirroTimesDevopsSingleHost,
 			"timescaledb":      timescaledb.NewTimescaleDevopsSingleHost,
 			"graphite":         graphite.NewGraphiteDevopsSingleHost,
 		},
@@ -74,6 +77,7 @@ var useCaseMatrix = map[string]map[string]map[string]bulkQueryGen.QueryGenerator
 			"influx-http":      influxdb.NewInfluxQLDevopsSingleHost12hr,
 			"mongo":            mongodb.NewMongoDevopsSingleHost12hr,
 			"opentsdb":         opentsdb.NewOpenTSDBDevopsSingleHost12hr,
+			"cirrotimes":       cirrotimes.NewCirroTimesDevopsSingleHost12hr,
 			"timescaledb":      timescaledb.NewTimescaleDevopsSingleHost12hr,
 			"graphite":         graphite.NewGraphiteDevopsSingleHost12hr,
 		},
@@ -84,6 +88,7 @@ var useCaseMatrix = map[string]map[string]map[string]bulkQueryGen.QueryGenerator
 			"influx-http":      influxdb.NewInfluxQLDevops8Hosts,
 			"mongo":            mongodb.NewMongoDevops8Hosts1Hr,
 			"opentsdb":         opentsdb.NewOpenTSDBDevops8Hosts,
+			"cirrotimes":       cirrotimes.NewCirroTimesDevops8Hosts,
 			"timescaledb":      timescaledb.NewTimescaleDevops8Hosts1Hr,
 			"graphite":         graphite.NewGraphiteDevops8Hosts,
 		},
@@ -101,6 +106,7 @@ var useCaseMatrix = map[string]map[string]map[string]bulkQueryGen.QueryGenerator
 			"influx-flux-http": influxdb.NewFluxIotSingleHost,
 			"influx-http":      influxdb.NewInfluxQLIotSingleHost,
 			"timescaledb":      timescaledb.NewTimescaleIotSingleHost,
+			"cirrotimes":       cirrotimes.NewCirroTimesIotSingleHost,
 			"cassandra":        cassandra.NewCassandraIotSingleHost,
 			"mongo":            mongodb.NewMongoIotSingleHost,
 		},
@@ -117,13 +123,22 @@ var useCaseMatrix = map[string]map[string]map[string]bulkQueryGen.QueryGenerator
 		},
 		DashboardCpuUtilization:         {"influx-http": influxdb.NewInfluxQLDashboardCpuUtilization},
 		DashboardDiskAllocated:          {"influx-http": influxdb.NewInfluxQLDashboardDiskAllocated},
-		DashboardDiskUsage:              {"influx-http": influxdb.NewInfluxQLDashboardDiskUsage},
+		DashboardDiskUsage:              {
+			"influx-http": influxdb.NewInfluxQLDashboardDiskUsage,
+			"cirrotimes" : cirrotimes.NewCirroTimesDiskUsage,
+		},
 		DashboardDiskUtilization:        {"influx-http": influxdb.NewInfluxQLDashboardDiskUtilization},
 		DashboardHttpRequestDuration:    {"influx-http": influxdb.NewInfluxQLDashboardHttpRequestDuration},
 		DashboardHttpRequests:           {"influx-http": influxdb.NewInfluxQLDashboardHttpRequests},
 		DashboardKapaCpu:                {"influx-http": influxdb.NewInfluxQLDashboardKapaCpu},
-		DashboardKapaLoad:               {"influx-http": influxdb.NewInfluxQLDashboardKapaLoad},
-		DashboardKapaRam:                {"influx-http": influxdb.NewInfluxQLDashboardKapaRam},
+		DashboardKapaLoad:               {
+			"influx-http": influxdb.NewInfluxQLDashboardKapaLoad,
+			"cirrotimes" : cirrotimes.NewCirroTimesKapaLoad,
+		},
+		DashboardKapaRam:                {
+			"influx-http": influxdb.NewInfluxQLDashboardKapaRam,
+			"cirrotimes" : cirrotimes.NewCirroTimesKapaRam,
+		},
 		DashboardMemoryTotal:            {"influx-http": influxdb.NewInfluxQLDashboardMemoryTotal},
 		DashboardMemoryUtilization:      {"influx-http": influxdb.NewInfluxQLDashboardMemoryUtilization},
 		DashboardNginxRequests:          {"influx-http": influxdb.NewInfluxQLDashboardNginxRequests},
@@ -165,6 +180,7 @@ var (
 
 	interleavedGenerationGroupID uint
 	interleavedGenerationGroups  uint
+	sgNum  int64
 )
 
 // Parse args:
@@ -206,7 +222,11 @@ func init() {
 	flag.UintVar(&interleavedGenerationGroupID, "interleaved-generation-group-id", 0, "Group (0-indexed) to perform round-robin serialization within. Use this to scale up data generation to multiple processes.")
 	flag.UintVar(&interleavedGenerationGroups, "interleaved-generation-groups", 1, "The number of round-robin serialization groups. Use this to scale up data generation to multiple processes.")
 
+	flag.Int64Var(&sgNum, "sg-num", 20, "storage group number of cirrotimes")
+
 	flag.Parse()
+
+	cirrotimes.SgNum = sgNum
 
 	if queryType == DevOpsEightHostsOneHour && scaleVar < 8 {
 		log.Fatal("\"scale-var\" must be greater than the hosts grouping number")
@@ -221,6 +241,7 @@ func init() {
 	}
 
 	if _, ok := useCaseMatrix[useCase][queryType]; !ok {
+		fmt.Println(useCase,queryType)
 		log.Fatal("invalid query type specifier")
 	}
 
@@ -355,7 +376,7 @@ func main() {
 			currentInterleavedGroup = 0
 		}
 	}
-
+	/*fmt.Println("out", out)*/
 	// Print stats:
 	keys := []string{}
 	for k, _ := range stats {

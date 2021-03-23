@@ -33,7 +33,7 @@ import (
 )
 
 // Output data format choices:
-var formatChoices = []string{"influx-bulk", "es-bulk", "es-bulk6x", "cassandra", "mongo", "opentsdb", "bcetsdb", "bcetsdb-bulk", "timescaledb-sql", "timescaledb-copyFrom", "graphite-line", "graphite-pickle", "alitsdb-http", "alitsdb"}
+var formatChoices = []string{"influx-bulk", "cirrotimes-bulk", "es-bulk", "es-bulk6x", "cassandra", "mongo", "opentsdb", "bcetsdb", "bcetsdb-bulk", "timescaledb-sql", "timescaledb-copyFrom", "graphite-line", "graphite-pickle", "alitsdb-http", "alitsdb"}
 
 // Program option vars:
 var (
@@ -62,6 +62,8 @@ var (
 	cpuProfile string
 
 	startVinIndex int
+
+	sgNum int64
 )
 
 // Parse args:
@@ -85,6 +87,8 @@ func init() {
 	flag.StringVar(&cpuProfile, "cpu-profile", "", "Write CPU profile to `file`")
 
 	flag.IntVar(&startVinIndex, "start-vin-index", 100000, "which first vin do you want to generate")
+
+	flag.Int64Var(&sgNum, "sg-num", 20, "storage group number of cirrotimes")
 
 	flag.Parse()
 
@@ -195,6 +199,8 @@ func main() {
 	switch format {
 	case "influx-bulk":
 		serializer = common.NewSerializerInflux()
+	case "cirrotimes-bulk":
+		serializer = common.NewSerializerCirrotimes(sgNum)
 	case "es-bulk":
 		serializer = common.NewSerializerElastic("5x")
 	case "es-bulk6x":
